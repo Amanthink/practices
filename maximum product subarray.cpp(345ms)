@@ -1,0 +1,17 @@
+class Solution {
+public:
+    int maxProduct(vector<int>& nums) {
+        int k = nums[0]; // Initialize k to the first element to handle cases with all negative numbers
+        int n = nums.size();
+
+        for (int i = 0; i < n; i++) {
+            int prod = 1; // Reset product for each new subarray starting at index i
+            for (int j = i; j < n; j++) {
+                prod *= nums[j]; // Calculate product for the subarray nums[i...j]
+                k = max(prod, k); // Update the maximum product
+            }
+        }
+
+        return k;
+    }
+};
