@@ -1,0 +1,26 @@
+class Solution {
+public:
+    int divide(int dividend, int divisor) {
+        // Handle overflow case
+        if (dividend == INT_MIN && divisor == -1) return INT_MAX;
+        if (dividend == INT_MIN && divisor == 1) return INT_MIN;
+
+        long long res = 0;
+        int sign = (dividend > 0) == (divisor > 0) ? 1 : -1; 
+
+        // Convert to long long to avoid overflow
+        long long a = abs((long long)dividend);
+        long long b = abs((long long)divisor);
+
+        if (b == a) return sign; 
+
+        if (a < b) return 0; 
+
+        while (a >= b) {
+            a -= b;
+            res++;
+        }
+
+        return sign * res;
+    }
+};
