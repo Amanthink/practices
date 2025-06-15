@@ -1,0 +1,24 @@
+int distributeCandies(int n, int limit) {
+    int ways = 0;  // This will store the total number of valid ways to distribute candies
+
+    // s = a + b (sum of candies given to first two children)
+    for (int s = 0; s <= 2 * limit; ++s) {
+        int c = n - s;  // If a + b = s, then c must be n - s
+
+        // If c is out of allowed range, skip this case
+        if (c < 0 || c > limit) continue;
+
+        // Now we need to count how many (a, b) pairs satisfy:
+        // a + b = s, and 0 ≤ a ≤ limit, 0 ≤ b ≤ limit
+
+        // a can range from max(0, s - limit) to min(s, limit)
+        // This makes sure b = s - a is also within [0, limit]
+        int low = max(0, s - limit);
+        int high = min(limit, s);
+
+        // The number of valid (a, b) pairs for this sum s is (high - low + 1)
+        ways += (high - low + 1);
+    }
+
+    return ways;  // Return the total number of valid distributions
+}
