@@ -51,4 +51,30 @@ public:
         return -1; 
     }
 };
+||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+ <h3> voting algorithm</h3>
+ class Solution {
+public:
+    int majorityElement(vector<int>& nums) {
+        int count = 0;       // Counter to track majority candidate
+        int candidate = 0;   // Potential majority element
+
+        // First pass: Find the candidate
+        for (int num : nums) {
+            if (count == 0) {
+                // If count drops to zero, we pick a new candidate
+                candidate = num;
+            }
+
+            // If current number equals candidate, increment count
+            // Otherwise, decrement count
+            count += (num == candidate) ? 1 : -1;
+        }
+
+        // Since the problem guarantees a majority element exists,
+        // we can return the candidate directly.
+        return candidate;
+    }
+};
+
 
